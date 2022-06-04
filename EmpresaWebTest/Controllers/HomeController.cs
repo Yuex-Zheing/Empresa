@@ -8,15 +8,17 @@ namespace EmpresaWebTest.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IEMpresaRepos rp;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IEMpresaRepos repos)
         {
             _logger = logger;
+            rp = repos;
         }
 
         public IActionResult Index()
         {
-            EmpresaRepos rp = new EmpresaRepos();
+          
             InfoEmpresa info = new InfoEmpresa();
 
             List<Empresa.Services.Cliente> clis = rp.ObtenerclienteAsync().Result;
@@ -51,7 +53,7 @@ namespace EmpresaWebTest.Controllers
                 {
                     NumeroCuenta = cta.Where(a=>a.IdCuenta == c.IdCuenta).First().NumeroCuenta,
                     TipoCuenta = (cta.Where(a => a.IdCuenta == c.IdCuenta).First().TipoCuenta == "A") ? "Ahorro" : "Corriente",
-                    SaldoInicial = cta.Where(a => a.IdCuenta == c.IdCuenta).First().SaldoInicial,
+                    SaldoInicial = c.Saldo,
                     EstadoMovimiento = (c.Estado == "A") ? "Activa" : "Inactiva",
                     Movimiento = c.MovDescripcion
                 });

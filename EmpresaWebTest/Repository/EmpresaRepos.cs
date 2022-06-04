@@ -39,6 +39,16 @@ namespace EmpresaWebTest.Repository
             return (await rp.ObtenermovimientosAsync(null)).ToList();
         }
 
+        public async Task<List<Empresa.Services.MovimientoReporte>> ObtenermovimientosreporteAsync( DateTime? Inicio, DateTime? Fin, int IdCliente )
+        {
+          
+
+            Empresa.Services.RestApi rp = new Empresa.Services.RestApi(client); //.ObtenerclienteAsync(3);
+            rp.BaseUrl = _url;
+
+            return (await rp.ObtenermovimientosreporteAsync((DateTimeOffset)Inicio, (DateTimeOffset)Fin, IdCliente)).ToList();
+        }
+
 
     }
 }
