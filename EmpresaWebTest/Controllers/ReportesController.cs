@@ -10,7 +10,7 @@ namespace EmpresaWebTest.Controllers
 
         public ReportesController(IEMpresaRepos repos)
         {
-           
+
             rp = repos;
         }
         public IActionResult Index()
@@ -20,13 +20,29 @@ namespace EmpresaWebTest.Controllers
 
 
             DateTime Init = new DateTime(2022, 6, 1, 0, 0, 0, 0);
+            DateTime Fin = new DateTime(2022, 12, 6, 0, 0, 0, 0);
+            int IdCliente = 1;
+
+            List<Empresa.Services.MovimientoReporte> clis = rp.ObtenermovimientosreporteAsync(Init, Fin, IdCliente).Result;
+
+
+            return View(clis);
+        }
+
+        public IActionResult ReportePorRangoFechas(DateTime Inicio)
+        {
+            InfoEmpresa info = new InfoEmpresa();
+
+
+            DateTime Init = new DateTime(2022, 6, 1, 0, 0, 0, 0);
             DateTime Fin = new DateTime(2022, 6, 6, 0, 0, 0, 0);
             int IdCliente = 1;
 
             List<Empresa.Services.MovimientoReporte> clis = rp.ObtenermovimientosreporteAsync(Init, Fin, IdCliente).Result;
-           
 
-            return View(clis);
+            return PartialView("_ReportePorRangoFechas",clis);
         }
+
+
     }
 }
