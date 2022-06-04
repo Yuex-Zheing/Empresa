@@ -1,0 +1,554 @@
+{
+	"info": {
+		"_postman_id": "c3fcfd87-2e2a-40f7-bde1-4d27227580f1",
+		"name": "EmpresaAPIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Consulta General de Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/clientes",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta de Clientes por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/clientes?idcliente=1",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"clientes"
+							],
+							"query": [
+								{
+									"key": "idcliente",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creacion de usuarios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"William\",\r\n  \"genero\": \"M\",\r\n  \"edad\": 34,\r\n  \"identificacion\": \"0919395181\",\r\n  \"direccion\": \"Al Sur\",\r\n  \"telefono\": \"0998753822\",\r\n  \"clave\": \"123456\",\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/clientes",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizacion de usuarios por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Hector\",\r\n  \"genero\": \"M\",\r\n  \"edad\": 39,\r\n  \"identificacion\": \"0919395181\",\r\n  \"direccion\": \"Al Norte\",\r\n  \"telefono\": \"0998753822\",\r\n  \"clave\": \"gg2020\",\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/clientes/4",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"clientes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuarios",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Hector\",\r\n  \"genero\": \"M\",\r\n  \"edad\": 39,\r\n  \"identificacion\": \"0919395181\",\r\n  \"direccion\": \"Al Norte\",\r\n  \"telefono\": \"0998753822\",\r\n  \"clave\": \"gg2020\",\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/clientes/4",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"clientes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuentas",
+			"item": [
+				{
+					"name": "Crear Cuentas Ahorro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCliente\": 4,\r\n  \"numeroCuenta\": \"444490\",\r\n  \"tipoCuenta\": \"A\",\r\n  \"saldoInicial\": 100.99,\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/cuentas",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Cuentas Corrientes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCliente\": 4,\r\n  \"numeroCuenta\": \"554490\",\r\n  \"tipoCuenta\": \"C\",\r\n  \"saldoInicial\": 900.99,\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/cuentas",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta General de Cuentas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/cuentas",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta General de Cuentas por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/cuentas?idcuenta=4",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"cuentas"
+							],
+							"query": [
+								{
+									"key": "idcuenta",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cuentas por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCliente\": 0,\r\n  \"numeroCuenta\": \"444444\",\r\n  \"tipoCuenta\": \"A\",\r\n  \"saldoInicial\": 5000.23,\r\n  \"estado\": \"A\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/cuentas/4",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"cuentas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dar de bajas cuentas",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/cuentas/5",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"cuentas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimientos",
+			"item": [
+				{
+					"name": "Crea movimientos Creditos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCuenta\": 4,\r\n  \"fecha\": \"2022-06-04T01:52:46.892Z\",\r\n  \"tipoMovimiento\": \"C\",\r\n  \"valor\": 2000,\r\n  \"saldo\": 0,\r\n  \"movDescripcion\": \"NA\",\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/movimientos",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crea movimientos Debitos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCuenta\": 4,\r\n  \"fecha\": \"2022-06-04T01:52:46.892Z\",\r\n  \"tipoMovimiento\": \"D\",\r\n  \"valor\": 100,\r\n  \"saldo\": 0,\r\n  \"movDescripcion\": \"NA\",\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/movimientos",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta General de movimientos por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/movimientos?idmovimiento=22",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"movimientos"
+							],
+							"query": [
+								{
+									"key": "idmovimiento",
+									"value": "22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta General de movimientos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/movimientos",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reporte por rango de fechas y cliente",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/movimientos/reporte?inicio=2022-06-01T01:57:37.914Z&fin=2022-06-09T01:57:37.914Z&idcliente=1",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"movimientos",
+								"reporte"
+							],
+							"query": [
+								{
+									"key": "inicio",
+									"value": "2022-06-01T01:57:37.914Z"
+								},
+								{
+									"key": "fin",
+									"value": "2022-06-09T01:57:37.914Z"
+								},
+								{
+									"key": "idcliente",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dar de baja un movimiento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/movimientos/22",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"movimientos",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar el estado de un movimiento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCuenta\": 0,\r\n  \"tipoMovimiento\": \"C\",\r\n  \"valor\": 0,\r\n  \"movDescripcion\": \"na\",\r\n  \"estado\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/movimientos/22",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"movimientos",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API",
+			"value": "https://localhost:7017"
+		}
+	]
+}

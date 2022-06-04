@@ -1,0 +1,1025 @@
+﻿openapi: 3.0.0
+info:
+  title: Cuentas
+  version: '1.0'
+  description: Operaciones con Cuentas
+  contact:
+    name: William
+    url: 'http://wquimis.com'
+    email: wquimis@gmail.com
+  termsOfService: 'http://wquimis.com'
+servers:
+  - url: 'http://localhost:3000'
+tags:
+  - name: Cuentas
+    description: Operaciones sobre cuentas
+paths:
+  /clientes:
+    parameters: []
+    post:
+      summary: Crear Cliente
+      operationId: crearcliente
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+              examples:
+                cliente:
+                  value:
+                    idCliente: 0
+                    nombres: string
+                    genero: M
+                    edad: 17
+                    identificacion: '0900000000'
+                    direccion: string
+                    telefono: '04000000'
+                    clave: pa$$word
+                    estado: A
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+            examples:
+              cliente:
+                value:
+                  idCliente: 0
+                  nombres: string
+                  genero: M
+                  edad: 17
+                  identificacion: '0900000000'
+                  direccion: string
+                  telefono: '04000000'
+                  clave: pa$$word
+                  estado: A
+        description: Devuelve el objeto creado con su ID
+      description: Creacion de Clientes
+      tags:
+        - Clientes
+    get:
+      summary: Consultar Clientes
+      operationId: obtenercliente
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+              examples:
+                cliente:
+                  value:
+                    - idCliente: 0
+                      nombres: string
+                      genero: M
+                      edad: 17
+                      identificacion: '0900000000'
+                      direccion: string
+                      telefono: '04000000'
+                      clave: pa$$word
+                      estado: A
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      description: Consulta de Clientes
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: idcliente
+          description: Identificador de cliente
+      tags:
+        - Clientes
+  '/clientes/{idcliente}':
+    put:
+      summary: Actualizar Cliente
+      operationId: actualizarcliente
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+              examples:
+                cliente:
+                  value:
+                    idCliente: 0
+                    nombres: string
+                    genero: M
+                    edad: 17
+                    identificacion: '0900000000'
+                    direccion: string
+                    telefono: '04000000'
+                    clave: pa$$word
+                    estado: A
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+            examples:
+              cliente:
+                value:
+                  idCliente: 0
+                  nombres: string
+                  genero: M
+                  edad: 17
+                  identificacion: '0900000000'
+                  direccion: string
+                  telefono: '04000000'
+                  clave: pa$$word
+                  estado: A
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+        description: Devuelve el cliente actualizado
+      description: Actualizacion de clientes
+      tags:
+        - Clientes
+    parameters:
+      - schema:
+          type: integer
+        name: idcliente
+        in: path
+        required: true
+    delete:
+      summary: Eliminar Cliente
+      operationId: eleminarcliente
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      description: Elimina cliente
+      tags:
+        - Clientes
+  /cuentas:
+    parameters: []
+    post:
+      summary: Crear Cuenta
+      operationId: crearcuenta
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cuenta'
+              examples:
+                cuenta:
+                  value:
+                    idCuenta: 0
+                    idCliente: 0
+                    numeroCuenta: '000000'
+                    tipoCuenta: A
+                    saldoInicial: 0
+                    estado: A
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cuenta'
+            examples:
+              cuenta:
+                value:
+                  idCuenta: 0
+                  idCliente: 0
+                  numeroCuenta: '000000'
+                  tipoCuenta: A
+                  saldoInicial: 0
+                  estado: A
+        description: Devuelve el objeto creado con su ID
+      tags:
+        - Cuentas
+      description: Creacion de cuentas
+    get:
+      summary: Consultar Cuentas
+      operationId: obtenercuenta
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cuenta'
+              examples:
+                cuenta:
+                  value:
+                    - idCuenta: 0
+                      idCliente: 0
+                      numeroCuenta: '000000'
+                      tipoCuenta: A
+                      saldoInicial: 0
+                      estado: A
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      description: Consulta de cuentas
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: idcuenta
+          description: Identificador de cuenta
+      tags:
+        - Cuentas
+  '/cuentas/{idcuenta}':
+    put:
+      summary: Actualizar Cuenta
+      operationId: actualizarcuenta
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cuenta'
+              examples:
+                cuenta:
+                  value:
+                    idCuenta: 0
+                    idCliente: 0
+                    numeroCuenta: '000000'
+                    tipoCuenta: A
+                    saldoInicial: 0
+                    estado: A
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cuenta'
+            examples:
+              cuenta:
+                value:
+                  idCuenta: 0
+                  idCliente: 0
+                  numeroCuenta: '000000'
+                  tipoCuenta: A
+                  saldoInicial: 0
+                  estado: A
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+        description: Objeto a actualizar
+      tags:
+        - Cuentas
+      description: Actualizar Cuenta
+    parameters:
+      - schema:
+          type: integer
+        name: idcuenta
+        in: path
+        description: Identificador de la cuenta
+        required: true
+    delete:
+      summary: Eliminar Cuenta
+      operationId: eliminarcuenta
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      tags:
+        - Cuentas
+      description: Elimina cuenta
+  /movimientos:
+    parameters: []
+    post:
+      summary: Crear Movimiento
+      operationId: crearmovimientos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movimiento'
+              examples:
+                movimiento:
+                  value:
+                    idMovimiento: 0
+                    idCuenta: 0
+                    fecha: '2019-08-24T14:15:22Z'
+                    tipoMovimiento: A
+                    valor: 0
+                    saldo: 0
+                    movDescripcion: Ninguno
+                    Estado: R
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - IdError: string
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - IdError: string
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movimiento'
+            examples:
+              movimiento:
+                value:
+                  idMovimiento: 0
+                  idCuenta: 0
+                  fecha: '2019-08-24T14:15:22Z'
+                  tipoMovimiento: A
+                  valor: 0
+                  saldo: 0
+                  movDescripcion: Ninguno
+                  Estado: R
+        description: Devuelve el objeto creado con su ID
+      description: Creacion de Movimientos
+      tags:
+        - Movimientos
+    get:
+      summary: Consultar Movimientos
+      operationId: obtenermovimientos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movimiento'
+              examples:
+                movimiento:
+                  value:
+                    - idMovimiento: 0
+                      idCuenta: 0
+                      fecha: '2019-08-24T14:15:22Z'
+                      tipoMovimiento: A
+                      valor: 0
+                      saldo: 0
+                      movDescripcion: Ninguno
+                      Estado: R
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      description: Consulta de Movimientos
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: idmovimiento
+          description: Identificador de movimiento
+      tags:
+        - Movimientos
+  /movimientos/reporte:
+    parameters: []
+    get:
+      summary: Consulta Movimientos Por Fecha
+      operationId: obtenermovimientosreporte
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovimientoReporte'
+              examples:
+                reporte:
+                  value:
+                    - fecha: '2019-08-24T14:15:22Z'
+                      cliente: string
+                      numeroCuenta: string
+                      tipoCuenta: string
+                      saldoInicial: 0
+                      estadoMovimiento: string
+                      movimiento: 0
+                      saldoDisponible: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      description: Consulta de Movimientos por fechas
+      parameters:
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: inicio
+          description: Fecha de inicio
+          required: true
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: fin
+          description: Fecha de fin
+          required: true
+        - schema:
+            type: integer
+          in: query
+          name: idcliente
+          description: Identificador del cliente
+          required: true
+      tags:
+        - Movimientos
+  '/movimientos/{idmovimiento}':
+    parameters:
+      - schema:
+          type: integer
+        name: idmovimiento
+        in: path
+        required: true
+    put:
+      summary: Actualizar Movimiento
+      operationId: actualizarmovimiento
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movimiento'
+              examples:
+                movimiento:
+                  value:
+                    idMovimiento: 0
+                    idCuenta: 0
+                    fecha: '2019-08-24T14:15:22Z'
+                    tipoMovimiento: A
+                    valor: 0
+                    saldo: 0
+                    movDescripcion: Ninguno
+                    Estado: R
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      description: Actualizar movimiento
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movimiento'
+            examples:
+              movimiento:
+                value:
+                  idMovimiento: 0
+                  idCuenta: 0
+                  fecha: '2019-08-24T14:15:22Z'
+                  tipoMovimiento: A
+                  valor: 0
+                  saldo: 0
+                  movDescripcion: Ninguno
+                  Estado: R
+        description: SOlicitud de movimiento
+      tags:
+        - Movimientos
+    delete:
+      summary: Eliminar Movimiento
+      operationId: eliminarmovimiento
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              examples:
+                errores:
+                  value:
+                    - idError: 0
+                      mensajeTecnico: string
+                      mensajeUsuario: string
+                      nivelError: string
+      description: Elimina un movimiento con IdMovimiento
+      tags:
+        - Movimientos
+components:
+  schemas:
+    Cuenta:
+      title: Cuenta
+      type: object
+      x-examples: {}
+      description: Modelo de cuenta
+      properties:
+        idCuenta:
+          type: integer
+        idCliente:
+          type: integer
+        numeroCuenta:
+          type: string
+          minLength: 6
+          maxLength: 10
+          default: '000000'
+        tipoCuenta:
+          type: string
+          maxLength: 1
+          default: A
+        saldoInicial:
+          type: number
+          maximum: 999999999994.999
+          minimum: -999999999999.999
+          default: 0
+          format: double
+        estado:
+          type: string
+          maxLength: 1
+          default: A
+      required:
+        - idCliente
+        - numeroCuenta
+        - tipoCuenta
+        - saldoInicial
+    Error:
+      title: Error
+      type: object
+      x-examples: {}
+      description: Modelos de errores
+      properties:
+        idError:
+          type: integer
+        mensajeTecnico:
+          type: string
+        mensajeUsuario:
+          type: string
+        nivelError:
+          type: string
+    Cliente:
+      type: object
+      x-examples: {}
+      title: Cliente
+      description: Modelo Cliente
+      properties:
+        idCliente:
+          type: integer
+        nombres:
+          type: string
+          maxLength: 100
+        genero:
+          type: string
+          maxLength: 1
+          default: M
+        edad:
+          type: integer
+          minimum: 1
+          maximum: 150
+          default: 17
+        identificacion:
+          type: string
+          maxLength: 10
+          default: '0900000000'
+        direccion:
+          type: string
+          maxLength: 200
+        telefono:
+          type: string
+          maxLength: 10
+          default: '04000000'
+        clave:
+          type: string
+          maxLength: 20
+          format: password
+        estado:
+          type: string
+          maxLength: 1
+          default: A
+      required:
+        - nombres
+        - identificacion
+        - direccion
+        - telefono
+        - clave
+    Movimiento:
+      title: Movimiento
+      x-stoplight:
+        id: hen7kygnnd3da
+      type: object
+      description: Modelo Movimientos financieros
+      properties:
+        idMovimiento:
+          type: integer
+        idCuenta:
+          type: integer
+        fecha:
+          type: string
+          format: date-time
+        tipoMovimiento:
+          type: string
+          maxLength: 1
+          default: A
+        valor:
+          type: number
+          minimum: -999999999999.999
+          maximum: 999999999999.999
+          default: 0
+          format: double
+        saldo:
+          type: number
+          default: 0
+          format: double
+          minimum: -999999999999.999
+          maximum: 999999999999.999
+        movDescripcion:
+          type: string
+          maxLength: 200
+          default: Ninguno
+        Estado:
+          type: string
+          default: R
+          maxLength: 1
+      required:
+        - idCuenta
+        - tipoMovimiento
+        - valor
+        - Estado
+    MovimientoReporte:
+      type: object
+      x-examples: {}
+      properties:
+        fecha:
+          type: string
+          format: date-time
+        cliente:
+          type: string
+        numeroCuenta:
+          type: string
+        tipoCuenta:
+          type: string
+        saldoInicial:
+          type: number
+          format: double
+        estadoMovimiento:
+          type: string
+        movimiento:
+          type: number
+          format: double
+        saldoDisponible:
+          type: number
+          format: double
