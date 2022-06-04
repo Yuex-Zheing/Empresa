@@ -1,8 +1,19 @@
+using EmpresaWebTest.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+#region Inyccion de dependencia
+
+// Conexion de Repos siempre la misma por Peticion
+builder.Services.AddScoped<IEMpresaRepos, EmpresaRepos>();
+
+
+#endregion
+
+#region Builder
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,3 +36,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+#endregion
