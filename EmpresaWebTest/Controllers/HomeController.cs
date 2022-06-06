@@ -17,6 +17,7 @@ namespace EmpresaWebTest.Controllers
         }
 
         public IActionResult Index()
+        
         {
           
             InfoEmpresa info = new InfoEmpresa();

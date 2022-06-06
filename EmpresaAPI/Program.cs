@@ -25,9 +25,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Configuration.AddJsonFile("appsettings.json", false, true);
+var _ambiente = builder.Configuration.GetSection("Ambiente").Get<EmpresaAPI.Models.Ambiente>();
+
+
 builder.Services
     .AddDbContext<EmpresaAPI.EntityModels.EmpresaContext>(
-       options => options.UseSqlServer("Server=192.168.100.144;Database=Empresa;User Id=sa;Password=Naomi003;"), 
+       options => options.UseSqlServer( _ambiente.getConexionString() ), 
        ServiceLifetime.Singleton);
 
 #region Swagger

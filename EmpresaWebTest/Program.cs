@@ -5,10 +5,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Configuration.AddJsonFile("appsettings.json", false, true);
+var _ambiente = builder.Configuration.GetSection("Ambiente").Get<EmpresaWebTest.Models.Ambiente>();
+
+
 #region Inyccion de dependencia
 
 // Conexion de Repos siempre la misma por Peticion
-builder.Services.AddScoped<IEMpresaRepos, EmpresaRepos>();
+builder.Services.AddScoped<IEMpresaRepos>(x=> new EmpresaRepos(_ambiente.apiUri)); //, EmpresaRepos>();
 
 
 #endregion
