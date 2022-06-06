@@ -1,4 +1,5 @@
-﻿using EmpresaWebTest.Models;
+﻿using Empresa.Services;
+using EmpresaWebTest.Models;
 using EmpresaWebTest.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,16 +30,16 @@ namespace EmpresaWebTest.Controllers
             return View(clis);
         }
 
-        public IActionResult ReportePorRangoFechas(DateTime Inicio)
+        public IActionResult ReportePorRangoFechas(DateTime dtInicio, DateTime dtFin, int IdCliente )
         {
             InfoEmpresa info = new InfoEmpresa();
+            Task<List<Empresa.Services.MovimientoReporte>> rpt = null;
+            List<Empresa.Services.MovimientoReporte> clis = new List<Empresa.Services.MovimientoReporte>();
 
+                rpt = rp.ObtenermovimientosreporteAsync(dtInicio, dtFin, IdCliente);
+                clis = rpt.Result;
+            
 
-            DateTime Init = new DateTime(2022, 6, 1, 0, 0, 0, 0);
-            DateTime Fin = new DateTime(2022, 6, 6, 0, 0, 0, 0);
-            int IdCliente = 1;
-
-            List<Empresa.Services.MovimientoReporte> clis = rp.ObtenermovimientosreporteAsync(Init, Fin, IdCliente).Result;
 
             return PartialView("_ReportePorRangoFechas",clis);
         }

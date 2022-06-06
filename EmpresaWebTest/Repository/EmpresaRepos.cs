@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using Empresa.Services;
+using System.Net.Http.Headers;
 
 namespace EmpresaWebTest.Repository
 {
@@ -45,8 +46,21 @@ namespace EmpresaWebTest.Repository
 
             Empresa.Services.RestApi rp = new Empresa.Services.RestApi(client); //.ObtenerclienteAsync(3);
             rp.BaseUrl = _url;
+            List<Empresa.Services.MovimientoReporte> taskApi = new List<MovimientoReporte>();
 
-            return (await rp.ObtenermovimientosreporteAsync((DateTimeOffset)Inicio, (DateTimeOffset)Fin, IdCliente)).ToList();
+            try {
+               var _taskApi = await rp.ObtenermovimientosreporteAsync((DateTimeOffset)Inicio, (DateTimeOffset)Fin, IdCliente);
+                taskApi = _taskApi.ToList();
+            }
+            catch (ApiException<ICollection<Error>> ex)
+            {
+
+                if(ex.Result.Count > 0)
+                    taskApi = new List<MovimientoReporte>();
+
+            }
+
+            return taskApi;
         }
 
 

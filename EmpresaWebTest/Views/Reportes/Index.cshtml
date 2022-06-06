@@ -1,18 +1,21 @@
 ﻿@model List<Empresa.Services.MovimientoReporte>
 
+@{
+    if (Model == null) return;
+}
+
 <h3>Listado de Movimientos por rangos de fechas</h3>
 <br/>
 
-@*<div id="ReportMain">
+<div id="ReportMain">
 
-<p>Fecha Inicio: <input type="text" class="dtreport" id="rptDtInicio"></p><br/>
-<p>Fecha Fin: <input type="text" class="dtreport"></p><br/>
-<p>IdCliente: <input type="text" id="txtcliente"></p><br/>
-
+<p>Fecha Inicio: <input type="text" class="dtreport" id="rptDtInicio"></p>
+<p>Fecha Fin: <input type="text" class="dtreport" id="rptDtFin"></p>
+<p>IdCliente: <input type="text" id="txtcliente"></p>
 <button id="rptBuscar" >Buscar</button>
-</div>*@
+</div>
 
 <br/>
-
+<div id="divReportRangoFechas">
 @await Html.PartialAsync("_ReportePorRangoFechas", Model)
-
+</div>

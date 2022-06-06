@@ -6,6 +6,12 @@
 // 2022-06-04T17:32:15.311Z
 $(function () {
 
+    function getDate(IdDatePicker) {
+        //Inicio: '2022-06-04T17:32:15.311Z'
+        var _dt1 = $(IdDatePicker).datepicker('getDate')
+        return _dt1.getFullYear() + "-" + (_dt1.getMonth() + 1) + "-" + _dt1.getDate();
+    }
+
     $("#ReportMain .dtreport").datepicker({
         showButtonPanel: true,
         dateFormat: "yy-mm-dd"
@@ -13,17 +19,21 @@ $(function () {
 
     $("#rptBuscar").click(function () {
 
-        var dateInicio = $('#rptDtInicio').datepicker('getDate');
+        var datajson = {
+            dtInicio: getDate("#rptDtInicio"),
+            dtFin: getDate("#rptDtFin"),
+            IdCliente: $("#txtcliente").val()
+        };
 
         $.ajax({
             cache: false,
             type: "POST",
             url: './Reportes/ReportePorRangoFechas',
             datatype: 'html',
-            data: { Inicio: '2022-06-04T17:32:15.311Z' },
+            data: datajson,
             success: function (data) {
-                //$("#DivGridResultadoConsultaChequesEmergencia").empty().html(data);
-                alert("ok");
+                $("#divReportRangoFechas").empty().html(data);
+                
             },
             error: function (req, status, error) {
                 alert("No se pudo cargar completamente la pagina");
