@@ -8,18 +8,18 @@ namespace EmpresaWebTest.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IEMpresaRepos rp;
+        private readonly IEmpresaRepos rp;
 
-        public HomeController(ILogger<HomeController> logger, IEMpresaRepos repos)
+        public HomeController(ILogger<HomeController> logger, IEmpresaRepos repos)
         {
             _logger = logger;
             rp = repos;
         }
 
         public IActionResult Index()
-        
+
         {
-          
+
             InfoEmpresa info = new InfoEmpresa();
 
             List<Empresa.Services.Cliente> clis = rp.ObtenerclienteAsync().Result;
@@ -52,7 +52,7 @@ namespace EmpresaWebTest.Controllers
             {
                 InfMov.Add(new InfoMovimientos()
                 {
-                    NumeroCuenta = cta.Where(a=>a.IdCuenta == c.IdCuenta).First().NumeroCuenta,
+                    NumeroCuenta = cta.Where(a => a.IdCuenta == c.IdCuenta).First().NumeroCuenta,
                     TipoCuenta = (cta.Where(a => a.IdCuenta == c.IdCuenta).First().TipoCuenta == "A") ? "Ahorro" : "Corriente",
                     SaldoInicial = c.Saldo,
                     EstadoMovimiento = (c.Estado == "A") ? "Activa" : "Inactiva",
@@ -83,6 +83,71 @@ namespace EmpresaWebTest.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult MantenimientoClientes(IFormCollection cols)
+        {
+
+            Empresa.Services.Cliente cl = new Empresa.Services.Cliente()
+            {
+                Nombres = cols["txtnombre"],
+                Direccion = cols["txtdireccion"],
+                Telefono = cols["txtnombre"],
+                Clave = cols["txtnombre"],
+                Edad = int.Parse(cols["txtedad"].ToString()),
+                Estado = cols["ddlestado"],
+                Genero = cols["ddlgenero"],
+                //IdCliente = cols["txt"],
+                Identificacion = cols["txtidentificacion"],
+            };
+
+            Models.ProcessReturn taslist = rp.CrearclienteAsync(cl).Result;
+
+            return new ObjectResult(taslist);
+
+        }
+
+        [HttpPost]
+        public IActionResult MantenimientoCuentas(IFormCollection cols)
+        {
+
+            Empresa.Services.Cuenta objProcess = new Empresa.Services.Cuenta()
+            {
+                Estado = cols["txtnombre"],
+                NumeroCuenta = cols["txtnombre"],
+                SaldoInicial = Double.Parse(cols["txtnombre"].ToString()),
+                TipoCuenta = cols["txtnombre"],
+                //IdCuenta
+                IdCliente = int.Parse(cols["txtnombre"].ToString())
+            };
+
+            Models.ProcessReturn taslist = rp.CrearcuentaAsync(objProcess).Result;
+
+            return new ObjectResult(taslist);
+
+        }
+
+        [HttpPost]
+        public IActionResult MantenimientoMovimientos(IFormCollection cols)
+        {
+
+            Empresa.Services.Movimiento objProcess = new Empresa.Services.Movimiento()
+            {
+                Estado = cols["txtnombre"],
+                Fecha = DateTimeOffset.Parse( cols["txtnombre"] ),
+                MovDescripcion = cols["txtnombre"],
+                Saldo =  Double.Parse( cols["txtnombre"]),
+                Valor = Double.Parse(cols["txtnombre"]),
+                TipoMovimiento = cols["txtnombre"],
+                IdCuenta = int.Parse( cols["txtnombre"])
+               //IdMovimiento
+            };
+
+            Models.ProcessReturn taslist = rp.CrearmovimientosAsync(objProcess).Result;
+
+            return new ObjectResult(taslist);
+
         }
     }
 }

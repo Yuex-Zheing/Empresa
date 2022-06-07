@@ -23,6 +23,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/TestAPI/Empresa/EmpresaWebTest/Views/Home/_MantenimientoClientes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTWFudGVuaW1pZW50b0NsaWVudGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/TestAPI/Empresa/EmpresaWebTest/Views/Home/_TablaClientes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfVGFibGFDbGllbnRlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

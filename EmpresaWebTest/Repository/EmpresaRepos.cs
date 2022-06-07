@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 
 namespace EmpresaWebTest.Repository
 {
-    public class EmpresaRepos: IEMpresaRepos
+    public class EmpresaRepos: IEmpresaRepos
     {
         static HttpClient client = new HttpClient();
         private readonly string _url;
@@ -13,6 +13,7 @@ namespace EmpresaWebTest.Repository
             _url = Uri;
         }
 
+        #region Manteminiemtos de Clientes
         public async Task<List<Empresa.Services.Cliente>> ObtenerclienteAsync()
         {
             List<Cliente> taskApi = new List<Cliente>();
@@ -34,6 +35,27 @@ namespace EmpresaWebTest.Repository
             return taskApi;
         }
 
+        public async Task<Models.ProcessReturn> CrearclienteAsync(Cliente cli)
+        {
+            Models.ProcessReturn rt = new Models.ProcessReturn();
+
+            try
+            {
+                Empresa.Services.RestApi rp = new Empresa.Services.RestApi(client);
+                rp.BaseUrl = _url;
+                rt.ObjectReturn = (await rp.CrearclienteAsync(cli));
+            }
+            catch (ApiException<ICollection<Error>> ex)
+            {
+                rt.error = ex.Result.ToList();
+            }
+            
+            return rt;
+        }
+
+        #endregion
+
+        #region Mantenimiento Cuentas
         public async Task<List<Empresa.Services.Cuenta>> ObtenercuentaAsync()
         {
             List<Cuenta> taskApi = new List<Cuenta>();
@@ -54,7 +76,27 @@ namespace EmpresaWebTest.Repository
             }
             return taskApi;
         }
+        public async Task<Models.ProcessReturn> CrearcuentaAsync(Cuenta objInput)
+        {
+            Models.ProcessReturn rt = new Models.ProcessReturn();
 
+            try
+            {
+                Empresa.Services.RestApi rp = new Empresa.Services.RestApi(client);
+                rp.BaseUrl = _url;
+                rt.ObjectReturn = (await rp.CrearcuentaAsync(objInput));
+            }
+            catch (ApiException<ICollection<Error>> ex)
+            {
+                rt.error = ex.Result.ToList();
+            }
+
+            return rt;
+        }
+
+        #endregion
+
+        #region Mantenimiento Movimientos
         public async Task<List<Empresa.Services.Movimiento>> ObtenermovimientosAsync()
         {
             List<Movimiento> taskApi = new List<Movimiento>();
@@ -77,7 +119,26 @@ namespace EmpresaWebTest.Repository
 
         }
 
-        public async Task<List<Empresa.Services.MovimientoReporte>> ObtenermovimientosreporteAsync( DateTime? Inicio, DateTime? Fin, int IdCliente )
+        public async Task<Models.ProcessReturn> CrearmovimientosAsync(Movimiento objInput)
+        {
+            Models.ProcessReturn rt = new Models.ProcessReturn();
+
+            try
+            {
+                Empresa.Services.RestApi rp = new Empresa.Services.RestApi(client);
+                rp.BaseUrl = _url;
+                rt.ObjectReturn = (await rp.CrearmovimientosAsync(objInput));
+            }
+            catch (ApiException<ICollection<Error>> ex)
+            {
+                rt.error = ex.Result.ToList();
+            }
+
+            return rt;
+        }
+        #endregion
+
+        public async  Task<List<Empresa.Services.MovimientoReporte>> ObtenermovimientosreporteAsync( DateTime? Inicio, DateTime? Fin, int IdCliente )
         {
           
 
@@ -99,7 +160,7 @@ namespace EmpresaWebTest.Repository
 
             return taskApi;
         }
-
+        
 
     }
 }

@@ -7,9 +7,9 @@ namespace EmpresaWebTest.Controllers
 {
     public class ReportesController : Controller
     {
-        private readonly IEMpresaRepos rp;
+        private readonly IEmpresaRepos rp;
 
-        public ReportesController(IEMpresaRepos repos)
+        public ReportesController(IEmpresaRepos repos)
         {
 
             rp = repos;

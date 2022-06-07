@@ -12,7 +12,7 @@ var _ambiente = builder.Configuration.GetSection("Ambiente").Get<EmpresaWebTest.
 #region Inyccion de dependencia
 
 // Conexion de Repos siempre la misma por Peticion
-builder.Services.AddScoped<IEMpresaRepos>(x=> new EmpresaRepos(_ambiente.apiUri)); //, EmpresaRepos>();
+builder.Services.AddScoped<IEmpresaRepos>(x=> new EmpresaRepos(_ambiente.apiUri)); //, EmpresaRepos>();
 
 
 #endregion
