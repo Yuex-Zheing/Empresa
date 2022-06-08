@@ -1,0 +1,74 @@
+﻿<div id="dlgCuentas" title="Basic dialog">
+
+
+
+    <form id="formCuentas" action="#" method="post">
+        <br /><br />
+        <table>
+
+            <tr>
+                <td style="width:50%;">
+                    Cliente
+                </td>
+                <td style="width:50%;">
+                    <select name="ddlclientes" id="ddlclientes">
+                       @* <option value="A">Activo</option>	*@	                       
+                    </select>
+
+
+                </td>
+            </tr>
+
+             <tr>
+                <td style="width:50%;">
+                    Numero Cuenta
+                </td>
+                <td style="width:50%;">
+                    <input type="text" name="txtnumerocuenta" id="txtnumerocuenta" />
+                </td>
+            </tr>
+
+             <tr>
+                <td style="width:50%;">
+                    Tipo Cuenta
+                </td>
+                <td style="width:50%;">
+                    <select name="ddltipocuenta" id="ddltipocuenta">
+                        <option value="A">Ahorro</option>		
+                        <option value="C">Corriente</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:50%;">
+                    Saldo Inicial
+                </td>
+                <td style="width:50%;">
+                    <input type="text" name="txtsaldoinicial" id="txtsaldoinicial" />
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:50%;">
+                    Estado
+                </td>
+                <td style="width:50%;">
+
+                    <select name="ddlestado" id="ddlestado">
+                        <option value="A">Activo</option>		
+                        <option value="I">Inactivo</option>
+                    </select>
+
+                </td>
+            </tr>        
+
+
+        </table>
+        <br /><br />
+        <button id="btnCrear" name="btnCrear" type="button" >Crear</button>
+
+    </form>
+
+
+</div>

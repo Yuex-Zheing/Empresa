@@ -65,15 +65,6 @@ namespace EmpresaWebTest.Controllers
             return View(info);
         }
 
-        //public IActionResult TablaClientes()
-        //{
-        //    ClientesRepos rp = new ClientesRepos();
-
-        //    List<Empresa.Services.Cliente> clis = rp.ObtenerclienteAsync().Result;
-
-        //    return PartialView("TablaClientes" ,clis);
-        //}
-
         public IActionResult Privacy()
         {
             return View();
@@ -114,12 +105,12 @@ namespace EmpresaWebTest.Controllers
 
             Empresa.Services.Cuenta objProcess = new Empresa.Services.Cuenta()
             {
-                Estado = cols["txtnombre"],
-                NumeroCuenta = cols["txtnombre"],
-                SaldoInicial = Double.Parse(cols["txtnombre"].ToString()),
-                TipoCuenta = cols["txtnombre"],
+                Estado = cols["ddlestado"],
+                NumeroCuenta = cols["txtnumerocuenta"],
+                SaldoInicial = Double.Parse(cols["txtsaldoinicial"].ToString()),
+                TipoCuenta = cols["ddltipocuenta"],
                 //IdCuenta
-                IdCliente = int.Parse(cols["txtnombre"].ToString())
+                IdCliente = int.Parse(cols["ddlclientes"].ToString())
             };
 
             Models.ProcessReturn taslist = rp.CrearcuentaAsync(objProcess).Result;
@@ -134,14 +125,14 @@ namespace EmpresaWebTest.Controllers
 
             Empresa.Services.Movimiento objProcess = new Empresa.Services.Movimiento()
             {
-                Estado = cols["txtnombre"],
-                Fecha = DateTimeOffset.Parse( cols["txtnombre"] ),
-                MovDescripcion = cols["txtnombre"],
-                Saldo =  Double.Parse( cols["txtnombre"]),
-                Valor = Double.Parse(cols["txtnombre"]),
-                TipoMovimiento = cols["txtnombre"],
-                IdCuenta = int.Parse( cols["txtnombre"])
-               //IdMovimiento
+                Estado = cols["ddlestado"],
+                Fecha = (DateTimeOffset)DateTime.Now, //DateTimeOffset.Parse(cols["txtfecha"]),
+                MovDescripcion = "N/A",//cols["txtdescripcion"],
+                Saldo = 0, //Double.Parse(cols["txtsaldo"]),
+                Valor = Double.Parse(cols["txtvalor"].ToString()),
+                TipoMovimiento = cols["ddltipomovimiento"],
+                IdCuenta = int.Parse(cols["ddlcuentas"])
+                //IdMovimiento
             };
 
             Models.ProcessReturn taslist = rp.CrearmovimientosAsync(objProcess).Result;
@@ -149,5 +140,27 @@ namespace EmpresaWebTest.Controllers
             return new ObjectResult(taslist);
 
         }
+
+        #region Utils
+
+        public IActionResult consultaClientesCuentas() {
+
+            List<Empresa.Services.Cliente> clis = rp.ObtenerclienteAsync().Result;
+            List<Empresa.Services.Cuenta> cta = rp.ObtenercuentaAsync().Result;
+
+            List<InfoClientes> cls = new List<InfoClientes>();
+
+            foreach (var cl in clis)
+            {
+                cls.Add(new InfoClientes(cl)
+                {
+                    infoCuentas = cta.Where(x => x.IdCliente == cl.IdCliente).ToList()
+                });
+            }
+
+            return new ObjectResult(cls);
+        }
+
+        #endregion
     }
 }

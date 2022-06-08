@@ -1,0 +1,80 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+    _MantenimientoMovimientos
+
+*@
+<div id="dlgMovimientos" title="Basic dialog">
+
+
+
+    <form id="formMovimientos" action="#" method="post">
+        <br /><br />
+        <table>
+
+            <tr>
+                <td style="width:50%;">
+                    Cuenta
+                </td>
+                <td style="width:50%;">
+                    <select name="ddlcuentas" id="ddlcuentas">
+                       @* <option value="A">Activo</option>	*@	                       
+                    </select>
+
+
+                </td>
+            </tr>
+
+             <tr>
+                <td style="width:50%;">
+                    Tipo Movimiento
+                </td>
+                <td style="width:50%;">
+                    <select name="ddltipomovimiento" id="ddltipomovimiento">
+                        <option value="D">Debito</option>		
+                        <option value="C">Credito</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:50%;">
+                    Valor
+                </td>
+                <td style="width:50%;">
+                    <input type="text" name="txtvalor" id="txtvalor" />
+                </td>
+            </tr>
+
+            @*<tr>
+                <td style="width:50%;">
+                    Saldo
+                </td>
+                <td style="width:50%;">
+                    <input type="text" name="txtsaldo" id="txtsaldo" />
+                </td>
+            </tr>*@
+
+            <tr>
+                <td style="width:50%;">
+                    Estado
+                </td>
+                <td style="width:50%;">
+
+                    <select name="ddlestado" id="ddlestado">
+                        <option value="A">Aprobado</option>		
+                        <option value="R">Rechazado</option>
+                    </select>
+
+                </td>
+            </tr>        
+
+
+        </table>
+        <br /><br />
+        <button id="btnCrear" name="btnCrear" type="button" >Crear</button>
+
+    </form>
+
+
+</div>

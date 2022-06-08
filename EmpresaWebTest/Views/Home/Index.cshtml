@@ -26,11 +26,18 @@
 
 <br />
 <h3>Listado de Movimientos</h3>
-
-@await Html.PartialAsync("_TablaMovimientos", Model._Movimientos)
 <br />
 <button id="btnDlg_CrearMovimiento" >Nuevo Movimiento</button>
 <br />
+@await Html.PartialAsync("_TablaMovimientos", Model._Movimientos)
+
 <div id="dlgClientes" style="display:none;" >
 @await Html.PartialAsync("_MantenimientoClientes")
+</div>
+<div id="dlgCuentas" style="display:none;" >
+@await Html.PartialAsync("_MantenimientoCuentas")
+</div>
+
+<div id="dlgMovimientos" style="display:none;" >
+@await Html.PartialAsync("_MantenimientoMovimientos")
 </div>
