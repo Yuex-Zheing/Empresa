@@ -79,22 +79,34 @@ namespace EmpresaWebTest.Controllers
         [HttpPost]
         public IActionResult MantenimientoClientes(IFormCollection cols)
         {
-
-            Empresa.Services.Cliente cl = new Empresa.Services.Cliente()
+            Models.ProcessReturn taslist = new ProcessReturn();
+            try
             {
-                Nombres = cols["txtnombre"],
-                Direccion = cols["txtdireccion"],
-                Telefono = cols["txtnombre"],
-                Clave = cols["txtnombre"],
-                Edad = int.Parse(cols["txtedad"].ToString()),
-                Estado = cols["ddlestado"],
-                Genero = cols["ddlgenero"],
-                //IdCliente = cols["txt"],
-                Identificacion = cols["txtidentificacion"],
-            };
+                Empresa.Services.Cliente cl = new Empresa.Services.Cliente()
+                {
+                    Nombres = cols["txtnombre"],
+                    Direccion = cols["txtdireccion"],
+                    Telefono = cols["txtnombre"],
+                    Clave = cols["txtnombre"],
+                    Edad = int.Parse(cols["txtedad"].ToString()),
+                    Estado = cols["ddlestado"],
+                    Genero = cols["ddlgenero"],
+                    //IdCliente = cols["txt"],
+                    Identificacion = cols["txtidentificacion"],
+                };
 
-            Models.ProcessReturn taslist = rp.CrearclienteAsync(cl).Result;
+                taslist = rp.CrearclienteAsync(cl).Result;
 
+            }
+            catch (Exception ex) {
+                taslist.error = new List<Empresa.Services.Error>() { 
+                    new Empresa.Services.Error() { 
+                        IdError = 100,
+                        MensajeTecnico = ex.Message,
+                        MensajeUsuario = "Ingrese todos los datos correctamente!"
+                    }
+                };
+            }
             return new ObjectResult(taslist);
 
         }
@@ -102,19 +114,31 @@ namespace EmpresaWebTest.Controllers
         [HttpPost]
         public IActionResult MantenimientoCuentas(IFormCollection cols)
         {
-
-            Empresa.Services.Cuenta objProcess = new Empresa.Services.Cuenta()
+            Models.ProcessReturn taslist = new ProcessReturn();
+            try
             {
-                Estado = cols["ddlestado"],
-                NumeroCuenta = cols["txtnumerocuenta"],
-                SaldoInicial = Double.Parse(cols["txtsaldoinicial"].ToString()),
-                TipoCuenta = cols["ddltipocuenta"],
-                //IdCuenta
-                IdCliente = int.Parse(cols["ddlclientes"].ToString())
-            };
+                Empresa.Services.Cuenta objProcess = new Empresa.Services.Cuenta()
+                {
+                    Estado = cols["ddlestado"],
+                    NumeroCuenta = cols["txtnumerocuenta"],
+                    SaldoInicial = Double.Parse(cols["txtsaldoinicial"].ToString()),
+                    TipoCuenta = cols["ddltipocuenta"],
+                    //IdCuenta
+                    IdCliente = int.Parse(cols["ddlclientes"].ToString())
+                };
 
-            Models.ProcessReturn taslist = rp.CrearcuentaAsync(objProcess).Result;
-
+                taslist = rp.CrearcuentaAsync(objProcess).Result;
+            }
+            catch (Exception ex)
+            {
+                taslist.error = new List<Empresa.Services.Error>() {
+                    new Empresa.Services.Error() {
+                        IdError = 100,
+                        MensajeTecnico = ex.Message,
+                        MensajeUsuario = "Ingrese todos los datos correctamente!"
+                    }
+};
+            }
             return new ObjectResult(taslist);
 
         }
@@ -122,6 +146,8 @@ namespace EmpresaWebTest.Controllers
         [HttpPost]
         public IActionResult MantenimientoMovimientos(IFormCollection cols)
         {
+            Models.ProcessReturn taslist = new ProcessReturn();
+            try { 
 
             Empresa.Services.Movimiento objProcess = new Empresa.Services.Movimiento()
             {
@@ -135,8 +161,18 @@ namespace EmpresaWebTest.Controllers
                 //IdMovimiento
             };
 
-            Models.ProcessReturn taslist = rp.CrearmovimientosAsync(objProcess).Result;
-
+            taslist = rp.CrearmovimientosAsync(objProcess).Result;
+        }
+            catch (Exception ex)
+            {
+                taslist.error = new List<Empresa.Services.Error>() {
+                    new Empresa.Services.Error() {
+                        IdError = 100,
+                        MensajeTecnico = "Ingrese todos los datos correctamente!",
+                        MensajeUsuario = "Ingrese todos los datos correctamente!"
+                    }
+};
+            }
             return new ObjectResult(taslist);
 
         }
@@ -149,6 +185,8 @@ namespace EmpresaWebTest.Controllers
             List<Empresa.Services.Cuenta> cta = rp.ObtenercuentaAsync().Result;
 
             List<InfoClientes> cls = new List<InfoClientes>();
+
+            if( clis.Count > 0 && cta.Count > 0 )
 
             foreach (var cl in clis)
             {
