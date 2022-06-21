@@ -186,13 +186,13 @@ namespace EmpresaWebTest.Controllers
 
             List<InfoClientes> cls = new List<InfoClientes>();
 
-            if( clis.Count > 0 && cta.Count > 0 )
+            if( clis.Count > 0 )//&& cta.Count > 0 )
 
             foreach (var cl in clis)
             {
                 cls.Add(new InfoClientes(cl)
                 {
-                    infoCuentas = cta.Where(x => x.IdCliente == cl.IdCliente).ToList()
+                    infoCuentas = (cta.Count > 0) ? cta.Where(x => x.IdCliente == cl.IdCliente).ToList() : new List<Empresa.Services.Cuenta>()
                 });
             }
 

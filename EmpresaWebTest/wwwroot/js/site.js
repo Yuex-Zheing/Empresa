@@ -38,7 +38,7 @@ $(function () {
 
         var datajson = {
             dtInicio: getDate("#rptDtInicio"),
-            dtFin: getDate("#rptDtFin"),
+            dtFin: getDate("#rptDtFin") + "T23:59:59.999Z",
             IdCliente: $("#ddlclientes").val()
         };
 

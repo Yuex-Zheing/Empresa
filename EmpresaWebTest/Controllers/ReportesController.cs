@@ -39,8 +39,6 @@ namespace EmpresaWebTest.Controllers
                 rpt = rp.ObtenermovimientosreporteAsync(dtInicio, dtFin, IdCliente);
                 clis = rpt.Result;
             
-
-
             return PartialView("_ReportePorRangoFechas",clis);
         }
 
