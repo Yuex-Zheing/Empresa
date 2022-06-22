@@ -1,6 +1,6 @@
 ﻿openapi: 3.0.0
 info:
-  title: Cuentas
+  title: Empresa
   version: '1.0'
   description: Operaciones con Cuentas
   contact:

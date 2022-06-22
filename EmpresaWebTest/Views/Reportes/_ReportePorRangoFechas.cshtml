@@ -2,32 +2,53 @@
     
 @if( Model.Count > 0){
 
-<table cellpadding="0" cellspacing="0" class="table table-bordered table-condensed">
-    <tr>
-        <th>Fecha</th>
-        <th>Cliente</th>
-        <th>Numero Cuenta</th>
-        <th>Tipo Cuenta</th>
-        <th>Saldo Inicial</th>
-          
-        <th>Estado Movimiento</th>
-        <th>Movimiento</th>
-        <th>Saldo Disponible</th>
-         
-    </tr>
-    @foreach (var p in Model.ToList())
-    {
-        <tr>
-            <td>@p.Fecha</td>
-            <td>@p.Cliente</td>
-            <td>@p.NumeroCuenta</td>
-            <td>@p.TipoCuenta</td>
-            <td>@p.SaldoInicial</td>
-            <td>@p.EstadoMovimiento</td>
-            <td>@p.Movimiento</td>
-            <td>@p.SaldoDisponible</td>
-        </tr>
+    <table cellpadding="0" cellspacing="0" class="table table-bordered table-condensed">
+
+    @{
+    int i=0;
+    string prev = "";//Model.First().NumeroCuenta;
+        @foreach (var p in Model.ToList())
+        {
+            
+
+            if( Model[i].NumeroCuenta != prev ){                    
+                prev = Model[i].NumeroCuenta;
+                   
+                   
+                    <thead>
+                     <tr>
+                        <th>Cuenta @p.NumeroCuenta</th>
+                    </tr>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Numero Cuenta</th>
+                            <th>Tipo Cuenta</th>
+                            <th>Saldo Inicial</th>              
+                            <th>Estado Movimiento</th>
+                            <th>Movimiento</th>
+                            <th>Saldo Disponible</th>                     
+                        </tr>
+                    </thead>
+                    
+                }
+
+            i++;                        
+                
+                <tr>
+                    <td>@p.Fecha.ToString("ddd, dd/MMM/yyyy HH:mm:ss")</td>
+                    <td>@p.Cliente</td>
+                    <td>@p.NumeroCuenta</td>
+                    <td>@p.TipoCuenta</td>
+                    <td>@string.Format("{0:C}", p.SaldoInicial)</td>
+                    <td>@p.EstadoMovimiento</td>
+                    <td class="@((p.Movimiento >= 0) ? "movnrm" : "movred")" >@string.Format("{0:C}", p.Movimiento)</td>
+                    <td>@string.Format("{0:C}", p.SaldoDisponible)</td>
+                </tr>
+                
+        }
     }
+
     </table>
 }
 else

@@ -137,6 +137,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.Urls.Add("http://*:8000/");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

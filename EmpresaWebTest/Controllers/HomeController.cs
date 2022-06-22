@@ -86,8 +86,8 @@ namespace EmpresaWebTest.Controllers
                 {
                     Nombres = cols["txtnombre"],
                     Direccion = cols["txtdireccion"],
-                    Telefono = cols["txtnombre"],
-                    Clave = cols["txtnombre"],
+                    Telefono = cols["txttelefono"],
+                    Clave = cols["txtclave"],
                     Edad = int.Parse(cols["txtedad"].ToString()),
                     Estado = cols["ddlestado"],
                     Genero = cols["ddlgenero"],

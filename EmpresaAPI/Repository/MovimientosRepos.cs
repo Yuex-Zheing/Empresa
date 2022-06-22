@@ -76,7 +76,8 @@ namespace EmpresaAPI.Repository
                                .Include(a => a.CuentaNavigation.ClienteNavigation)
                                .Include(p => p.CuentaNavigation.ClienteNavigation.PersonaNavigation)
                                .Where( x=> x.Fecha >= Inicio && x.Fecha <= Fin  && x.CuentaNavigation.ClienteNavigation.IdCliente == idcliente)
-                               .OrderByDescending(z => z.IdMovimiento)
+                               .OrderByDescending(z => z.CuentaNavigation.NumeroCuenta )
+                               .ThenByDescending(z => z.IdMovimiento)
                                .Select( s=> new {
                                    s.Fecha,
                                    s.CuentaNavigation.ClienteNavigation.PersonaNavigation.Nombre,
@@ -163,7 +164,7 @@ namespace EmpresaAPI.Repository
                 saldo -= valorMov;
                 Description = "Retiro de " + valorMov;
 
-                if ((sumRetDiario + valorMov) >= MaxRetiro) throw new Exception("Cupo diario excedido");
+                if ((sumRetDiario + valorMov) > MaxRetiro) throw new Exception("Cupo diario excedido");
 
                 if (saldo < 0) throw new Exception("Saldo no disponible");
                 

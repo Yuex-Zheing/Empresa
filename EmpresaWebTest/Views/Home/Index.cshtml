@@ -5,21 +5,21 @@
 @model EmpresaWebTest.Models.InfoEmpresa
 
 <h1>Consultas Generales</h1>
-
 <br />
 <br />
 <h3>Listado de Clientes</h3>
 <br />
-<button id="btnDlg_CrearCliente" >Nuevo Cliente</button>
+<button id="btnDlg_CrearCliente" class="btn btn-outline-primary" >Nuevo Cliente</button>
 <br />
-
+<br />
 @await Html.PartialAsync("_TablaClientes", Model._Clientes)
 
 
 <br />
 <h3>Listado de Cuentas</h3>
 <br />
-<button id="btnDlg_CrearCuentas" >Nueva Cuenta</button>
+<button id="btnDlg_CrearCuentas" class="btn btn-outline-primary">Nueva Cuenta</button>
+<br />
 <br />
 @await Html.PartialAsync("_TablaCuentas", Model._Cuentas)
 
@@ -27,7 +27,8 @@
 <br />
 <h3>Listado de Movimientos</h3>
 <br />
-<button id="btnDlg_CrearMovimiento" >Nuevo Movimiento</button>
+<button id="btnDlg_CrearMovimiento" class="btn btn-outline-primary" >Nuevo Movimiento</button>
+<br />
 <br />
 @await Html.PartialAsync("_TablaMovimientos", Model._Movimientos)
 
