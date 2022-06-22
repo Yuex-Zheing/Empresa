@@ -52,6 +52,7 @@ namespace EmpresaAPI.Repository
                 ctas = (from x in EFCtx.Cuentas
                        .Include(b => b.ClienteNavigation)
                        .Where(o => o.Estado.Equals("A"))
+                       .OrderByDescending(b => b.NumeroCuenta)
                         select x).ToList();
             }
             else

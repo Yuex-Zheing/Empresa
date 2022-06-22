@@ -54,6 +54,8 @@ namespace EmpresaAPI.Repository
             {
                 clis = (from x in EFCtx.Movimientos
                        .Include(b => b.CuentaNavigation)
+                       .OrderByDescending(o => o.CuentaNavigation.NumeroCuenta)
+                       .ThenByDescending(z => z.IdMovimiento)
                         select x).ToList();
             }
             else

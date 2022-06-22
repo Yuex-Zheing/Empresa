@@ -57,6 +57,7 @@ namespace EmpresaAPI.Repository
                 clis = (from x in EFCtx.Clientes
                        .Include(b=>b.PersonaNavigation)
                        .Where(o => o.Estado.Equals("A"))
+                       .OrderByDescending( z=>z.IdCliente)
                         select x).ToList();
             }
             else {
