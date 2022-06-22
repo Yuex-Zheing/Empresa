@@ -164,7 +164,7 @@ $(function () {
                 $.each(data, function (idx, itm) {
 
                     $.each(itm.infoCuentas, function (i, it) {
-                        var names = itm.nombres + "-" + it.numeroCuenta;
+                        var names = itm.nombres + " " + ( ( it.tipoCuenta == "A" ) ? "AHO" : "COR" ) + "-" + it.numeroCuenta;
 
                         var option = new Option(names, it.idCuenta);
                         sel.append($(option));

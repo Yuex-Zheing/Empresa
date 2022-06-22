@@ -6,6 +6,13 @@ drop table Clientes;
 drop table Personas;
 */
 
+/*
+Select * from Personas;
+select * from Clientes;
+select * from Cuentas;
+select * from Movimientos;
+*/
+
 create table Personas(
 	IdPersona int not null PRIMARY KEY IDENTITY(1,1) ,
 	Nombre nvarchar(100) not null,

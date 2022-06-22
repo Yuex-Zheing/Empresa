@@ -23,7 +23,10 @@ namespace EmpresaWebTest.Controllers
             InfoEmpresa info = new InfoEmpresa();
 
             List<Empresa.Services.Cliente> clis = rp.ObtenerclienteAsync().Result;
-            info._Clientes = clis;
+
+            if (clis.Count == 0) return View(info);
+
+            info._Clientes = clis;      
 
             List<Empresa.Services.Cuenta> cta = rp.ObtenercuentaAsync().Result;
 
@@ -33,6 +36,7 @@ namespace EmpresaWebTest.Controllers
             {
                 InfCta.Add(new InfoCuentas()
                 {
+                    IdCuenta = c.IdCuenta,
                     NumeroCuenta = c.NumeroCuenta,
                     TipoCuenta = (c.TipoCuenta == "A") ? "Ahorro" : "Corriente",
                     SaldoInicial = c.SaldoInicial,
@@ -50,14 +54,18 @@ namespace EmpresaWebTest.Controllers
             List<InfoMovimientos> InfMov = new List<InfoMovimientos>();
             foreach (var c in mov)
             {
-                InfMov.Add(new InfoMovimientos()
+                var cur_cta = cta.Where(x => x.IdCuenta == c.IdCuenta).FirstOrDefault();
+                if (cur_cta != null)
                 {
-                    NumeroCuenta = cta.Where(a => a.IdCuenta == c.IdCuenta).First().NumeroCuenta,
-                    TipoCuenta = (cta.Where(a => a.IdCuenta == c.IdCuenta).First().TipoCuenta == "A") ? "Ahorro" : "Corriente",
-                    SaldoInicial = c.Saldo,
-                    EstadoMovimiento = (c.Estado == "A") ? "Activa" : "Inactiva",
-                    Movimiento = c.MovDescripcion
-                });
+                    InfMov.Add(new InfoMovimientos()
+                    {
+                        NumeroCuenta = cur_cta.NumeroCuenta,
+                        TipoCuenta = (cur_cta.TipoCuenta == "A") ? "Ahorro" : "Corriente",
+                        SaldoInicial = c.Saldo,
+                        EstadoMovimiento = (c.Estado == "A") ? "Aprobado" : "Rechazado",
+                        Movimiento = c.MovDescripcion
+                    });
+                }
             }
 
             info._Movimientos = InfMov;
